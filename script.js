@@ -15,8 +15,20 @@ const loadBeers = async () => {
   return beers.json();
 };
 
+/*
 loadBeers().then((value) =>
   value.forEach((element) => {
     beerContainer.innerHTML += beerCardTemplate(element);
   })
 );
+*/
+
+//Mejor solución, credit Elisa
+const run = async () => {
+  myBeers = await loadBeers()
+  myBeers.forEach((beer)=>{
+    beerContainer.innerHTML += beerCardTemplate(beer);
+  })
+}
+
+run()
