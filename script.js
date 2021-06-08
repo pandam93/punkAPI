@@ -24,11 +24,11 @@ loadBeers().then((value) =>
 */
 
 //Mejor solución, credit Elisa
-const run = async () => {
-  myBeers = await loadBeers()
-  myBeers.forEach((beer)=>{
-    beerContainer.innerHTML += beerCardTemplate(beer);
+const loadBeers = async () => {
+  const beers = await fetch("https://api.punkapi.com/v2/beers");
+  const data = await beers.json()
+  data.forEach((element) => {
+    beerContainer.innerHTML += beerCardTemplate(element);
   })
-}
-
-run()
+};
+loadBeers()
