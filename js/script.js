@@ -3,7 +3,7 @@ const beerCardTemplate = function (beer) {
                 <img class="img-beer" src="${beer.image_url}" alt="beer" />
                 <h1>${beer.name}</h1>
                 <p class="title">${beer.tagline}</p>
-                <p><a href="./beer.html?id=${beer.id}">Show more</a></p>
+                <p><a href="./public/beers.html?id=${beer.id}">Show more</a></p>
               </div>`;
 };
 

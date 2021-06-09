@@ -20,8 +20,9 @@ const beerCardTemplate = function (beer) {
                     )} </p>
                     <p> <strong>Brewers Tips:</strong> ${beer.brewers_tips} </p>
                     <h3> Contributed By: ${beer.contributed_by} </h3>
+                    <br />
                     <div id="mapid" style="height: 200px; max-height: 200px"></div>
-                    <br /> <br /> <br />  
+                      
                 </div>`;
 };
 
@@ -41,7 +42,7 @@ if (beerId) {
       let beerContainer = document.getElementById("container-beers");
       if (cerveza.image_url === null)
         cerveza.image_url =
-          "./img/depositphotos_227725020-stock-illustration-no-image-available-icon-flat.jpg";
+          "./img/public/img/depositphotos_227725020-stock-illustration-no-image-available-icon-flat.jpg";
       beerContainer.innerHTML += beerCardTemplate(cerveza);
     });
 } else {
@@ -64,7 +65,7 @@ function getRandomInRange(from, to, fixed) {
 setTimeout(function () {
   const x = getRandomInRange(-180, 180, 3);
   const y = getRandomInRange(-180, 180, 3);
-  var map = L.map("mapid").setView([x, y], 13);
+  var map = L.map("mapid").setView([x, y], 6);
   L.tileLayer(
     "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2ZtaWxsYW5tIiwiYSI6ImNrcHBxZDNxYzNiY3Eyd3JpaWxmdjlhbXUifQ.6i6Xjk628Wt1_4OqLdYLHw",
     {
@@ -74,7 +75,8 @@ setTimeout(function () {
       id: "mapbox/streets-v11",
       tileSize: 512,
       zoomOffset: -1,
-      accessToken: "your.mapbox.access.token",
+      accessToken:
+        "pk.eyJ1IjoiY2ZtaWxsYW5tIiwiYSI6ImNrcHBxZDNxYzNiY3Eyd3JpaWxmdjlhbXUifQ.6i6Xjk628Wt1_4OqLdYLHw",
     }
   ).addTo(map);
 
@@ -82,4 +84,4 @@ setTimeout(function () {
     .addTo(map)
     .bindPopup("Puedes encontrar esta cerveza en este establecimiento.")
     .openPopup();
-}, 2000);
+}, 1000);
