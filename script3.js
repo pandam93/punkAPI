@@ -20,6 +20,7 @@ const beerCardTemplate = function (beer) {
                     )} </p>
                     <p> <strong>Brewers Tips:</strong> ${beer.brewers_tips} </p>
                     <h3> Contributed By: ${beer.contributed_by} </h3>
+                    <div id="mapid" style="height: 200px; max-height: 200px"></div>
                     <br /> <br /> <br />  
                 </div>`;
 };
@@ -54,3 +55,31 @@ if (beerId) {
       beerContainer.innerHTML += beerCardTemplate(cerveza);
     });
 }
+
+function getRandomInRange(from, to, fixed) {
+  return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
+  // .toFixed() returns string, so ' * 1' is a trick to convert to number
+}
+
+setTimeout(function () {
+  const x = getRandomInRange(-180, 180, 3);
+  const y = getRandomInRange(-180, 180, 3);
+  var map = L.map("mapid").setView([x, y], 13);
+  L.tileLayer(
+    "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2ZtaWxsYW5tIiwiYSI6ImNrcHBxZDNxYzNiY3Eyd3JpaWxmdjlhbXUifQ.6i6Xjk628Wt1_4OqLdYLHw",
+    {
+      attribution:
+        'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 18,
+      id: "mapbox/streets-v11",
+      tileSize: 512,
+      zoomOffset: -1,
+      accessToken: "your.mapbox.access.token",
+    }
+  ).addTo(map);
+
+  L.marker([x, y])
+    .addTo(map)
+    .bindPopup("Puedes encontrar esta cerveza en este establecimiento.")
+    .openPopup();
+}, 2000);
