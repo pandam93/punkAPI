@@ -14,9 +14,9 @@ const beerCardTemplate = function (beer) {
                     }
                     <p> <strong>Ingredients:</strong> ${Object.keys(
                       beer.ingredients
-                    )}
+                    ).join(", ")}
                     <p> <strong>Food pairing: </strong> ${beer.food_pairing.join(
-                      "<br />"
+                      " / "
                     )} </p>
                     <p> <strong>Brewers Tips:</strong> ${beer.brewers_tips} </p>
                     <h3> Contributed By: ${beer.contributed_by} </h3>
@@ -30,7 +30,7 @@ const queryString = window.location.search;
 
 const urlParams = new URLSearchParams(queryString);
 
-const beerId = urlParams.get("id");
+const beerId = urlParams.get("beer");
 
 if (beerId) {
   fetch(`https://api.punkapi.com/v2/beers/${beerId}`)
@@ -42,8 +42,8 @@ if (beerId) {
       let beerContainer = document.getElementById("container-beers");
       if (cerveza.image_url === null)
         cerveza.image_url =
-          "./img/public/img/depositphotos_227725020-stock-illustration-no-image-available-icon-flat.jpg";
-      beerContainer.innerHTML += beerCardTemplate(cerveza);
+          "../public/img/depositphotos_227725020-stock-illustration-no-image-available-icon-flat.jpg";
+      beerContainer.innerHTML = beerCardTemplate(cerveza);
     });
 } else {
   fetch(`https://api.punkapi.com/v2/beers/random`)
@@ -53,7 +53,10 @@ if (beerId) {
     .then(function (beer) {
       [cerveza] = beer;
       let beerContainer = document.getElementById("container-beers");
-      beerContainer.innerHTML += beerCardTemplate(cerveza);
+      if (cerveza.image_url === null)
+        cerveza.image_url =
+          "../public/img/depositphotos_227725020-stock-illustration-no-image-available-icon-flat.jpg";
+      beerContainer.innerHTML = beerCardTemplate(cerveza);
     });
 }
 

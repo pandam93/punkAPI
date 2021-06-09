@@ -3,7 +3,7 @@ const beerCardTemplate = function (beer) {
                 <img class="img-beer" src="${beer.image_url}" alt="beer" />
                 <h1>${beer.name}</h1>
                 <p class="title">${beer.tagline}</p>
-                <p><a href="./public/beers.html?id=${beer.id}">Show more</a></p>
+                <p><a href="./beer.html?beer=${beer.id}">Show more</a></p>
               </div>`;
 };
 
@@ -19,6 +19,9 @@ fetch("https://api.punkapi.com/v2/beers")
   .then(function (beers) {
     let beerContainer = document.getElementById("container-beers");
     beers.forEach((element) => {
+      if (element.image_url === null)
+        element.image_url =
+          "../public/img/depositphotos_227725020-stock-illustration-no-image-available-icon-flat.jpg";
       beerContainer.innerHTML += beerCardTemplate(element);
     });
   });
