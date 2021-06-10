@@ -17,7 +17,7 @@ fetch("https://api.punkapi.com/v2/beers")
     return response.json();
   })
   .then(function (beers) {
-    let beerContainer = document.getElementById("container-beers");
+    let beerContainer = document.getElementById("app-beers");
     beers.forEach((element) => {
       if (element.image_url === null)
         element.image_url =
@@ -25,3 +25,33 @@ fetch("https://api.punkapi.com/v2/beers")
       beerContainer.innerHTML += beerCardTemplate(element);
     });
   });
+
+let searchBar = document.getElementById("searchBar");
+searchBar.addEventListener("keyup", fnSearch);
+
+function fnSearch() {
+  let searchBar = document.getElementById("searchBar");
+  let beerApp = document.getElementById("app-beers");
+  let beers = beerApp.querySelectorAll(".beer");
+  let filter = searchBar.value.toUpperCase();
+
+  beers.forEach((element) => {
+    h1 = element.querySelector("h1");
+    txtValue = h1.textContent || h1.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      element.style.display = "";
+    } else {
+      element.style.display = "none";
+    }
+  });
+
+  // for (i = 0; i < beers.length; i++) {
+  //   a = beers[i].getElementsByTagName("h1")[0];
+  //   txtValue = a.textContent || a.innerText;
+  //   if (txtValue.toUpperCase().indexOf(filter) > -1) {
+  //     beers[i].style.display = "";
+  //   } else {
+  //     beers[i].style.display = "none";
+  //   }
+  // }
+}

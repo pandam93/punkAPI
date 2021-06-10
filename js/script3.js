@@ -39,7 +39,7 @@ if (beerId) {
     })
     .then(function (beer) {
       [cerveza] = beer;
-      let beerContainer = document.getElementById("container-beers");
+      let beerContainer = document.getElementById("app-beers");
       if (cerveza.image_url === null)
         cerveza.image_url =
           "../public/img/depositphotos_227725020-stock-illustration-no-image-available-icon-flat.jpg";
@@ -52,7 +52,7 @@ if (beerId) {
     })
     .then(function (beer) {
       [cerveza] = beer;
-      let beerContainer = document.getElementById("container-beers");
+      let beerContainer = document.getElementById("app-beers");
       if (cerveza.image_url === null)
         cerveza.image_url =
           "../public/img/depositphotos_227725020-stock-illustration-no-image-available-icon-flat.jpg";

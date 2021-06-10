@@ -27,6 +27,13 @@ li a {
   text-decoration: none;
 }
 
+li input {
+  display: block;
+  margin-top: 20px;
+  padding: 14px, 16px;
+  font-size: 20px;
+}
+
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 10px;
@@ -102,15 +109,6 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin: auto;
-}
-
-.container-beers {
-  max-width: 1200px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: baseline;
   margin: auto;
 }
 
@@ -325,4 +323,10 @@ img {
   .textos h2 {
     font-size: 15px;
   }
+}
+
+.fadeOut {
+  opacity: 0;
+  height: 0;
+  transition: opacity 800ms, height 0 800ms;
 }
